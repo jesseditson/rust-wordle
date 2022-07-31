@@ -1,22 +1,17 @@
 use colored::Colorize;
 use rand::Rng;
-use std::fs;
 use std::io;
 
+const WORDS_BYTES: &'static str = include_str!("./words.txt");
 const ALPHA: &str = "abcdefghijklmnopqrstuvwxyz";
 
 fn get_word(all_words: &Vec<String>) -> String {
     let random = rand::thread_rng().gen_range(0, all_words.len());
     all_words[random].clone()
-    // all_words.nth(random).unwrap().to_string()
 }
 
 fn read_words() -> Vec<String> {
-    fs::read_to_string("./words.txt")
-        .expect("Failed reading words file.")
-        .lines()
-        .map(|s| s.to_owned())
-        .collect()
+    WORDS_BYTES.lines().map(|s| s.to_owned()).collect()
 }
 
 fn main() {
